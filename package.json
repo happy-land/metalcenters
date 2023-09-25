@@ -47,5 +47,6 @@
   "devDependencies": {
     "react-router-dom": "^6.15.0",
     "sass": "^1.66.1"
-  }
+  },
+  "homepage": "https://happy-land.github.io/metalcenters/"
 }
