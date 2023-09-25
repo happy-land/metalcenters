@@ -1,0 +1,161 @@
+.page-container {
+    // border: 1px solid red;
+    background-color: #e2e3e4;
+    border-radius: 20px;
+    max-width: 1440px;
+    height: 95vh;
+    margin: 0 auto;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &__form {
+        // border: 1px solid green;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        width: 320px;
+    }
+
+    &__form-label {
+        margin: 8px 0 0 10px;
+        padding: 0;
+    }
+
+    &__listbox {
+        border: none;
+        width: 300px;
+        // position: fixed;
+        margin: 10px auto; /* Only centers horizontally not vertically! */
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        margin: 20px auto;
+        padding: 0px;
+    }
+
+    &__listbox-button {
+        border: none;
+        position: relative;
+        border-radius: 10px;
+        background-color: #f2f4f8;
+        padding: 0 0 0 8px;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        font-size: 20px;
+        height: 40px;
+        cursor: pointer;
+    }
+    &__chevron-icon {
+        position: absolute;
+        width: 20px;
+        top: 10px;
+        right: 8px;
+    }
+
+    &__listbox-options {
+        position: fixed;
+        box-sizing: border-box;
+        margin: 44px 0 0;
+        padding: 0;
+        width: 300px;
+        height: 240px;
+        overflow: scroll;
+        border-radius: 10px;
+        background-color: rgb(210, 213, 213);
+        z-index: 1;
+    }
+
+    &__option {
+        // border: 1px solid red;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        height: 30px;
+        padding: 4px 8px;
+        cursor: pointer;
+    }
+
+    &__option:hover {
+        background-color: rgb(206, 205, 205);
+        border-radius: 10px;
+    }
+
+    &__input-wrapper {
+        position: relative;
+    }
+
+    &__dadata-container {
+        // border: 1px solid blue;
+        width: 300px;
+        display: flex;
+        margin: 20px auto;
+        flex-direction: column;
+    }
+    &__dadata-input {
+        border: none;
+        border-radius: 10px;
+        padding-left: 8px;
+        width: 290px;
+        height: 40px;
+        background-color: #f2f4f8;
+        font-size: 14px;
+    }
+
+    &__clear-icon {
+        position: absolute;
+        width: 20px;
+        top: 30px;
+        right: 16px;
+        cursor: pointer;
+    }
+
+    &__dadata-suggestions {
+        // border: 1px solid green;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        margin-top: 44px;
+        padding: 0;
+        width: 300px;
+    }
+    &__dadata-suggestion {
+        text-align: left;
+    }
+
+    &__gps {
+        margin: 0 0 0 10px;
+        padding: 0;
+        color: #a1a2a3;
+        font-size: 12px;
+    }
+
+    &__submit-button {
+        border: none;
+        border-radius: 20px;
+        margin: 30px auto;
+        width: 160px;
+        height: 60px;
+        font-size: 24px;
+        background-color: #f2f4f8;
+        cursor: pointer;
+    }
+    &__submit-button:hover {
+        background-color: #dde2ec;
+    }
+
+    &__distance {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    .prevent-select {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
+}

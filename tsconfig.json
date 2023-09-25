@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "typeRoots": [
+      "./node_modules/@yandex/ymaps3-types",
+    ],
+    "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
