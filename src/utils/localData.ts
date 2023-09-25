@@ -97,8 +97,8 @@ export const bases = [
         streetType: 'ул.',
     },
     coords: {
-      lat: 56.095685,
-      lng: 40.345594,
+      lat: 43.075249,
+      lng: 44.690986,
     },
   },
   {
@@ -709,8 +709,8 @@ export const bases = [
         streetType: 'ул.',
     },
     coords: {
-      lat: 54.233985,
-      lng: 37.548860,
+      lat: 57.150880,
+      lng: 65.374293,
     },
   },
   {
