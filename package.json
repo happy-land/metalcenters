@@ -1,7 +1,8 @@
 {
   "name": "metalcenters",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://happy-land.github.io/metalcenters",
+  "private": false,
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@mapbox/search-js-react": "^1.0.0-beta.17",
@@ -11,8 +12,9 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.46",
     "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
+    "@types/react-dom": "^18.0.10",
     "bem-cn": "^3.0.1",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-dadata": "^2.23.1",
     "react-dom": "^18.2.0",
@@ -22,6 +24,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -45,8 +49,8 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.15.0",
-    "sass": "^1.66.1"
-  },
-  "homepage": "https://happy-land.github.io/metalcenters/"
+    "sass": "^1.66.1",
+    "react-router-dom": "^6.3.0"
+  }
+  
 }
