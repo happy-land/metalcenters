@@ -1,3 +1,7 @@
-# Расчет расстояния от металлобазы до адреса доставки
- версия 0.1
-[https://happy-land.github.io/metalcenters/#/map](https://happy-land.github.io/metalcenters/#/map)
+# Расчет расстояния от металлобазы до адреса доставки по России 
+ версия 0.1  
+
+[https://happy-land.github.io/metalcenters/#/map](https://happy-land.github.io/metalcenters/#/map)  
+## Сервисы, используемые в проекте  
+* MapBox - для расчета расстояния по автомобильным дорогам
+* DaData - показ всплывающих подсказок в поле ввода, а также геокодирование (перевод адрес в GPS координаты)

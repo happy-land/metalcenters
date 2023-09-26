@@ -1,10 +1,9 @@
 import block from 'bem-cn';
-import React, { MouseEvent, FormEvent, useEffect, useState } from 'react';
+import { MouseEvent, FormEvent, useState, useRef } from 'react';
 import { Listbox } from '@headlessui/react';
 import './MapsPage.scss';
-import { checkResponse, getBaseByName, getBaseNames } from '../utils/api';
-import { useForm } from '../hooks/useForm';
-import { accessToken, daDataApiKey } from '../utils/constants';
+import { getBaseByName, getBaseNames, getDistance } from '../utils/api';
+import { BUTTON_TEXT_NORMAL, daDataApiKey } from '../utils/constants';
 
 import ChevronIcon from '../images/icons/chevron/chevron.svg';
 import ClearIcon from '../images/icons/clear/clear.svg';
@@ -14,117 +13,55 @@ import {
   DaDataSuggestion,
   DaDataAddress,
 } from 'react-dadata';
+import { renderLoading } from '../utils/utils';
+import { IButtonProps } from '../utils/types';
 
 const cnStyles = block('page-container');
-
-// const coordA = '37.448055,56.028075';
-// const coordA = '37.467868,56.015721';
-const coordA = '33.048633,68.964319';
-// const coordB = '37.165734,56.422240';  // Рогачево
-const coordB = '37.517532,56.342905'; // Дмитров
 
 const baseNames = getBaseNames();
 
 const MapsPage = () => {
-  const [placeA, setPlaceA] = useState();
-  const [placeB, setPlaceB] = useState();
   const [distance, setDistance] = useState(Number);
 
   const [selectedBase, setSelectedBase] = useState(baseNames[0]);
 
-  const { values, handleChange } = useForm({
-    from: '',
-    to: '',
+  const [buttonState, setButtonState] = useState<IButtonProps>({
+    text: BUTTON_TEXT_NORMAL,
+    disabled: false,
   });
 
   const [value, setValue] = useState<
     DaDataSuggestion<DaDataAddress> | undefined
   >();
 
-  const convertCoordsToPlace = async (coord: string) => {
-    const res = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${coord}.json?access_token=${accessToken}`
-    );
-    return checkResponse(res);
-  };
-
-  const convertPlaceToCoords = async (searchText: string) => {
-    const res = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?country=RU&access_token=${accessToken}`
-    );
-    return checkResponse(res);
-  };
-
-  const getDistance = async (from: string, to: string) => {
-    const res = await fetch(
-      `https://api.mapbox.com/directions/v5/mapbox/driving/${from};${to}?access_token=${accessToken}`
-    );
-    return checkResponse(res);
-  };
-
-  const getSuggestedResult = async (searchText: string) => {
-    const res = await fetch(
-      `https://api.mapbox.com/search/searchbox/v1/suggest?q=${searchText}&access_token=${accessToken}`
-    );
-    return checkResponse(res);
-  };
-
-  useEffect(() => {
-    main();
-  });
-
-  async function main() {
-    // convertCoordsToPlace(coordA).then((data) => {
-    //   // console.log(data.features[0].place_name);
-    //   setPlaceA(data.features[0].place_name);
-    // });
-    // convertCoordsToPlace(coordB).then((data) => {
-    //   // console.log(data.features[0].place_name);
-    //   setPlaceB(data.features[0].place_name);
-    // });
-    // getDistance(coordA, coordB).then((data) => {
-    //   const dist = Math.round(Number(data.routes[0].distance / 1000));
-    //   setDistance(dist);
-    // });
-  }
+  const suggestionsRef = useRef<AddressSuggestions>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const base = getBaseByName(selectedBase);
     const fromCoords = base?.coords.lng + ', ' + base?.coords.lat;
-
-    // поменяем местами широту и долготу
-    // const coordsArr = values.to.split(',');
-    // const toCoords = coordsArr[1].trim() + ', ' + coordsArr[0].trim();
     const toCoords = value?.data.geo_lon + ', ' + value?.data.geo_lat;
 
-    // convertCoordsToPlace(toCoords).then((data) => {
-    //   setPlaceB(data.features[0].place_name);
-    // });
+    setButtonState(renderLoading(true));
 
-    getDistance(fromCoords, toCoords).then((data) => {
-      const dist = Math.round(Number(data.routes[0].distance / 1000));
-      setDistance(dist);
-    });
-
-
-    // Place -> Coords
-    // const coords = convertPlaceToCoords(values.to);
-    // console.log(coords);
-
-    // Coords -> Place  56.422608, 37.166773
-    // const place = convertCoordsToPlace(values.to);
-    // console.log(place);
-
-    // Get Suggested results
-    // const result = getSuggestedResult(values.to);
-    // console.log(result);
+    getDistance(fromCoords, toCoords)
+      .then((data) => {
+        const dist = Math.round(Number(data.routes[0].distance / 1000));
+        setDistance(dist);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setButtonState(renderLoading(false));
+      });
   };
 
   const clearInput = (event: MouseEvent<HTMLElement>) => {
     setValue(undefined);
-  }
+    if (suggestionsRef.current) {
+      suggestionsRef.current?.focus();
+    }
+  };
 
   return (
     <div className={cnStyles()}>
@@ -156,6 +93,7 @@ const MapsPage = () => {
         <label className={cnStyles('form-label')}>До пункта назначения</label>
         <div className={cnStyles('input-wrapper')}>
           <AddressSuggestions
+            ref={suggestionsRef}
             token={daDataApiKey}
             value={value}
             onChange={setValue}
@@ -165,19 +103,24 @@ const MapsPage = () => {
             suggestionClassName={cnStyles('dadata-suggestion')}
           />
           <img
-                className={cnStyles('clear-icon')}
-                src={ClearIcon}
-                alt='ClearIcon'
-                onClick={clearInput}
-              />
+            className={cnStyles('clear-icon')}
+            src={ClearIcon}
+            alt='ClearIcon'
+            onClick={clearInput}
+          />
         </div>
-        <p className={cnStyles('gps')}>Координаты: {value && `${value?.data.geo_lat}, ${value?.data.geo_lon}`} </p>
-        <button type='submit' className={cnStyles('submit-button')}>
-          Рассчитать
+        <p className={cnStyles('gps')}>
+          Координаты:{' '}
+          {value && `${value?.data.geo_lat}, ${value?.data.geo_lon}`}
+        </p>
+        <button
+          type='submit'
+          disabled={buttonState.disabled}
+          className={cnStyles('submit-button')}
+        >
+          {buttonState.text}
         </button>
       </form>
-
-      
 
       <p className={cnStyles('distance')}>
         Расстояние: <b>{distance}</b> км

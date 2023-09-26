@@ -148,6 +148,10 @@
         background-color: #dde2ec;
     }
 
+    &__submit-button:disabled {
+        cursor: auto;
+    }
+
     &__distance {
         text-align: center;
         font-size: 36px;
