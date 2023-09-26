@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/metalcenters/static/css/main.51e42491.css",
+    "main.js": "/metalcenters/static/js/main.7295de0d.js",
+    "index.html": "/metalcenters/index.html",
+    "static/media/chevron.svg": "/metalcenters/static/media/chevron.65a57b6b5210c7cc5476443a45a3b92d.svg",
+    "static/media/clear.svg": "/metalcenters/static/media/clear.c8494eb2642084db18174e0aac7bfcf6.svg",
+    "main.51e42491.css.map": "/metalcenters/static/css/main.51e42491.css.map",
+    "main.7295de0d.js.map": "/metalcenters/static/js/main.7295de0d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.51e42491.css",
+    "static/js/main.7295de0d.js"
+  ]
+}
