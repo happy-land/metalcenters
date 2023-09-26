@@ -1,7 +1,6 @@
 import block from 'bem-cn';
 import React, { MouseEvent, FormEvent, useEffect, useState } from 'react';
 import { Listbox } from '@headlessui/react';
-import ReactDOM from 'react-dom';
 import './MapsPage.scss';
 import { checkResponse, getBaseByName, getBaseNames } from '../utils/api';
 import { useForm } from '../hooks/useForm';
@@ -88,10 +87,6 @@ const MapsPage = () => {
     //   setDistance(dist);
     // });
   }
-  useEffect(() => {
-    const names = getBaseNames();
-    console.log(names);
-  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
