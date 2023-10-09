@@ -8,9 +8,9 @@ const App: FC = () => {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/1" element={<h1>1</h1>} />
-        <Route path='/2' element={<h1>222</h1>} />
-        <Route path='/map' element={<MapsPage />} />
-        <Route path='/' element={<h1>Главная страница</h1>} />
+        {/* <Route path='/2' element={<h1>222</h1>} />
+        <Route path='/map' element={<MapsPage />} /> */}
+        <Route path='/' element={<MapsPage />} />
       </Route>
     </Routes>
   );
