@@ -361,16 +361,16 @@ export const bases = [
     address: {
         country: 'Россия',
         addressLevel1: 'Нижегородская область',
-        addressLevel2: 'городской округ Нижний Новгород',
-        addressLevel3: '',
-        addressLevel4: 'сельский посёлок Кудьма',
-        streetLevel1: 'Станционная',
-        streetLevel2: 'д. 15',
+        addressLevel2: '',
+        addressLevel3: 'Нижний Новгород',
+        addressLevel4: '',
+        streetLevel1: 'Окская Гавань',
+        streetLevel2: 'д. 5А',
         streetType: 'ул.',
     },
     coords: {
-      lat: 56.162411,
-      lng: 43.860046,
+      lat: 56.234920,
+      lng: 43.910684,
     },
   },
   {
